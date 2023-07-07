@@ -1,0 +1,168 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0%;
+    text-decoration: none;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #fafafa;
+}
+
+.NavBar {
+    padding: 0px 15px;
+    background-color: #1a1a1a !important;
+}
+
+.navigation a i {
+    color: #fafafa;
+    transition: color 250ms ease;
+}
+
+.navigation a i:hover {
+    color: #ffc107;
+}
+
+.search input, #message-text {
+    background-color: #282828;
+    color: #fafafa;
+    border: none;
+}
+
+.search input:focus, #message-text:focus {
+    background-color: #282828;
+    box-shadow: none;
+    color: #fafafa;
+    /* border:1px solid #ffc107 !important; */
+}
+
+.search input::placeholder, #message-text::placeholder {
+    color: #636363;
+}
+
+.dropdown-menu li a {
+    color: #fafafa;
+
+}
+
+.mainBody{
+    height: 100vh;
+    background-color: #1a1a1a;
+    padding: 0px 24px;
+}
+
+.left,
+.mid,
+.right{
+    background-color: #1a1a1a;
+    border-radius: 15px;
+}
+
+.left{
+    width: 100%;
+}
+
+.mid{
+    width: 60%;
+    margin: 0px 15px;
+}
+
+
+
+
+.profile{
+    background-color: #282828 !important;
+    color: #fafafa !important;
+}
+
+.profilePic{
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    border: 8px solid #1a1a1a;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.second{
+    /* margin-top: 2rem !important; */
+    color: #fafafa;
+}
+
+.line{
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    height: 2px;
+    background-color: #1a1a1a;
+}
+
+.myProfileBtn{
+    transition: background-color 200ms ease, border-color 200ms ease;
+}
+.myProfileBtn:hover{
+    background-color: #1a1a1a !important;
+    border-color: #1a1a1a !important;
+}
+
+/* .mid{
+    background-color: #ffc107;
+} */
+
+.postInputContainer{
+    width: 100%;
+    background-color: #282828;
+    border-radius: 15px;
+    padding: 15px 20px;
+}
+.image{
+    width: 60px;
+}
+
+#postInput{
+    background-color: #222;
+}
+
+.postBtn{
+    color: #636363;
+    width: 100%;
+}
+
+.btnOptions button{
+    width: 120px;
+}
+
+.btnOptions button i{
+    margin-right: 10px;
+}
+
+.postImage-video{
+    width: 100%;
+    
+}
+
+.comment-container{
+    width: 100% !important ;
+}
+
+#post-text{
+    word-wrap: break-word;
+}
+
+
+#comment{
+    background-color: #222;
+}
+@media(max-width: 1024px){
+    .profile{
+        width: 100% !important;
+        height: 530px !important;
+    }
+    .right{
+        padding: 0;
+    }
+}

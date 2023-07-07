@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0%;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a1a1a !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23ffc107' fill-opacity='0.05' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.Maincontainer {
+    padding: 0px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    /* z-index: 100; */
+}
+
+.logo {
+    padding: 10px 5px;
+}
+
+.logo h1 {
+    font-size: 4.5rem;
+    font-family: 'Righteous', cursive;
+    text-align: center;
+    letter-spacing: 1rem;
+    color: #fafafa;
+}
+
+.heading h1 {
+    font-family: 'Righteous', cursive;
+    letter-spacing: 0.3rem;
+    text-align: center;
+    color: #fafafa;
+}
+
+.formContainer {
+    width: 50%;
+
+    /* border: 2px solid black; */
+    padding: 40px 15px;
+    background: rgba(40, 40, 40, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border: 1px solid rgba(40, 40, 40, 0.6);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form p {
+    margin-bottom: 5px;
+    color: #fafafa;
+}
+
+.passDiv {
+    width: 70%;
+}
+
+.passDiv button {
+    height: fit-content;
+}
+
+.passDiv input {
+    width: 100%;
+}
+
+input {
+    width: 70%;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #ffc107;
+    font-size: 16px;
+    padding: 8px;
+}
+
+input:focus {
+    outline: 1px solid #ffc107 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#email,
+#password,
+#flexCheckDefault {
+    margin-bottom: 15px;
+}
+
+#loginBtn {
+    width: fit-content;
+    padding: 6px 55px;
+}
+
+#creatBtn {
+    width: fit-content;
+}
+
+#exampleModalLabel {
+    font-family: 'Righteous', cursive;
+    width: 100%;
+}
+
+.modal-header {
+    border-bottom: none !important;
+    text-align: center !important;
+}
+
+.modal-header .btn-close {
+    margin-left: 0px;
+}
+
+.dropdown-item:hover {
+    background-color: #198754 !important;
+    color: white !important;
+}
+
+#text-muted {
+    font-size: 13px;
+    color: red;
+}
+
+
+/* SmartPhone Screen */
+
+@media(min-width: 320px) and (max-width: 500px) {
+    .logo h1 {
+        font-size: 2rem;
+    }
+
+    .formContainer {
+        width: 100%;
+        height: 80vh;
+    }
+
+    #email{
+        width: 90% !important;
+    }
+
+    .passDiv{
+        width: 90%;
+    }
+
+    #purpleBlob {
+        width: 250px !important;
+        right: 70px;
+    }
+
+    #greenBlob {
+        width: 360px !important;
+    }
+
+    #yellowBlob {
+        left: -88px !important;
+        bottom: 53px !important;
+    }
+
+    #redBlob {
+        width: 255px !important;
+        top: -55px !important;
+    }
+}
+
+/* Tablet Screen */
+
+@media(min-width: 501px) and (max-width: 768px) {
+    #purpleBlob {
+        right: 130px;
+    }
+
+    .formContainer {
+        width: 66%;
+    }
+}

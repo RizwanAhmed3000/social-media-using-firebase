@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acrlancer- LogIn or signUp</title>
+    <!-- <link rel="stylesheet" href="style02.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="Assets/blobz.min.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/1b5d96e744.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="Maincontainer">
+        <div class="logo">
+            <h1>Logo Here</h1>
+        </div>
+
+        <!-- Login Form -->
+
+
+        <div class="formContainer">
+            <div class="heading">
+                <h1>Log in</h1>
+            </div>
+            <div class="form">
+                <p class="fw-bold">Email address</p>
+                <input type="text" id="email" placeholder="Email address" class="form-control" style="width: 70%;">
+                <p class="fw-bold">Password</p>
+                <div class="passDiv d-flex">
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control " id="password" placeholder="Password">
+                        <button class="btn btn-outline-warning passwordBtn" onclick="showHide(password)" type="button"
+                            id="button-addon2"><i class="fa-regular fa-eye"></i></button>
+                    </div>
+                    <!-- <input type="password" id="password" placeholder="Password">
+                    <button class="btn btn-outline-success passwordBtn" onclick="showHide()" type="button" id="button-addon2"><i class="fa-regular fa-eye"></i></button> -->
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault" style="color: #fafafa;">
+                        Remember me
+                    </label>
+                </div>
+                <button type="button" id="loginBtn" class="btn btn-warning">Log in</button>
+                <p>or</p>
+                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" id="creatBtn"
+                    data-bs-target="#exampleModal" data-bs-whatever="@mdo">Creat new account</button>
+
+            </div>
+        </div>
+
+        <!-- Signup Modal -->
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content" style="background-color: #282828; color: #fafafa;">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 " id="exampleModalLabel">Sign up here</h1>
+                        <button type="button" class="btn-close" style="fill: #fafafa;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">First name:</label>
+                                <input type="text" placeholder="First Name" class="form-control" id="first-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-Last-name" class="col-form-label">Last name:</label>
+                                <input type="text" placeholder="Last Name" class="form-control" id="last-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email-address" class="col-form-label">Email address:</label>
+                                <input type="email" placeholder="Email address" class="form-control" id="email-address">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email-address" class="col-form-label">Phone Number:</label>
+                                <input type="email" placeholder="Phone Number" class="form-control" id="phoneNumber">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="col-form-label">New password:</label>
+                                <div class="input-group mb-3">
+                                    <input type="password" placeholder="New Password" class="form-control" id="new-password">
+                                    <button class="btn btn-outline-warning passwordBtn" onclick="showHide(newPassword)"
+                                        type="button" id="button-addon2"><i class="fa-regular fa-eye"></i></button>
+                                </div>
+                                <p class=" passwordWarning" id="text-muted">Must contain 8 or mor characters</p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Date-Of-Birth" class="col-form-label">Date of birth:</label>
+                                <input type="date" class="form-control" id="dateOfBirth">
+                            </div>
+                            <div class="mb-3">
+                                <label for="Gender" class="col-form-label d-block">Gender:</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="genderMale" value="option1" onclick="genderHandler('Male')">
+                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="genderfemale" value="option2" onclick="genderHandler('Female')">
+                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="emptyInput()">Close</button>
+                        <button type="button" class="btn btn-warning" id="creatAcctountBtn" 
+                            >Creat account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <script type="module" src="app.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

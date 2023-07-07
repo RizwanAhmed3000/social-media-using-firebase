@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/1b5d96e744.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="NavBar">
+        <div class="container-fluid d-flex justify-content-between align-items-center" style="padding: 1rem 0;">
+            <div class="container-fluid logo-search d-flex align-items-center">
+                <div class="logo">
+                    <h4 style="color: #fafafa;">logo</h4>
+                    <!-- <img src="" alt=""> -->
+                </div>
+                <div class="search ps-3 ">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="#Explore"
+                            aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <button class="btn " type="button" id="button-addon1" style="background-color: #282828;"><i
+                                class="fa-solid fa-magnifying-glass" style="color: #636363;"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid navigation d-flex justify-content-center align-items-center">
+                <a href="#"><i class="fa-solid fa-house px-4 fs-5"></i></a>
+                <a href="#"><i class="fa-regular fa-comment px-4 fs-5"></i></a>
+                <a href="../myProfile/index.html"><i class="fa-solid fa-user px-4 fs-5"></i></i></a>
+                <a href="#"><i class="fa-regular fa-bell px-4 fs-5"></i></a>
+                <a href="#"><i class="fa-regular fa-heart px-4 fs-5"></i></a>
+            </div>
+            <div class="container-fluid options d-flex justify-content-end align-items-center">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle"
+                        style="background-color: #282828; border-color: #282828;" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Username
+                    </button>
+                    <ul class="dropdown-menu" style="background-color: #282828;">
+                        <li><a class="dropdown-item" href="../myProfile/index.html">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item logoutBtn"  href="">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- main dash -->
+
+
+    <div class="mainBody container-fluid my-4 d-flex">
+        <div class="left d-flex flex-column">
+            <div class="card profile"
+                style="width: 100%; height: 400px; border-radius: 15px; position: relative;border: none; ">
+                <img src="https://images.unsplash.com/photo-1635016288720-c52507b9a717?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
+                    class="card-img-top" alt="..." height="40%" style="object-fit: cover; border-radius: 15px;">
+                <div class="card-body d-flex flex-column">
+                    <div class="first">
+                        <div class="profilePic d-flex justify-content-center align-items-center"
+                            style="width: 100px; height: 100px;">
+                            <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+                                alt="" style="width: 100%; height: 100% ;object-fit: cover; border-radius: 10px;">
+                        </div>
+                    </div>
+                    <div class="third d-flex justify-content-between">
+                        <div class="followers">
+                            <h5 class="text-center mb-0">0000</h5>
+                            <p class="text-center mb-0" style="color: #868686; font-size: 12px;">Followers</p>
+                        </div>
+                        <div class="following">
+                            <h5 class="text-center mb-0">0000</h5>
+                            <p class="text-center mb-0" style="color: #868686; font-size: 12px;">Following</p>
+                        </div>
+                    </div>
+                    <div class="second">
+                        <h5 class="text-center mb-1 username">Username</h5>
+                        <p class="text-center mb-1 userTag" style="color: #868686; font-size: 12px;">@Username</p>
+                    </div>
+
+                    <div class="fourth">
+                        <p class="text-center mb-0 mt-3" style="color: #fafafa; font-size: 12px;">Lorem ipsum dolor sit
+                            amet consectetur adipisicing elit. Temporibus error debitis quas corporis odio autem.</p>
+                    </div>
+                    <div class="line"></div>
+                    <button type="button" class="btn btn-secondary myProfileBtn"
+                        style="background-color: #2f2e2e; border-color: #2f2e2e;">My Profile</button>
+                </div>
+            </div>
+        </div>
+        <div class="mid postSection">
+            <!-- post input ka container -->
+            <div class="postInputContainer container">
+                <div class="postInputField d-flex justify-content-center align-items-center">
+                    <div class="image">
+                        <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+                            alt="" class="img-fluid rounded mx-auto d-block">
+                    </div>
+                    <div class="search ps-3 " style="width: 100%;">
+
+
+                        <button class="btn postBtn text-start" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-bs-whatever="@mdo" type="button" id="button-addon1"
+                            style="background-color: #222222;">Creat a new post</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style="background-color: #282828 !important;">
+                                    <div class="modal-header">
+                                        <div class="modal-header-container d-flex align-items-center">
+                                            <div class="image">
+                                                <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+                                                    alt="" class="img-fluid rounded mx-auto d-block">
+                                            </div>
+                                            <div class="userName-id ms-2">
+                                                <h5 class="mb-1 username">Username</h5>
+                                                <p class="mb-1 userTag" style="color: #868686; font-size: 12px;">
+                                                    @Username</p>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <textarea class="form-control" id="message-text"
+                                                    style="height: 250px; background-color: #282828;"
+                                                    placeholder="What do you want to talk about"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" data-bs-dismiss="modal" class="btn btn-warning"
+                                            onclick="postHandler()">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="btnOptions d-flex justify-content-between align-items-center mt-3">
+                    <button type="button" class="btn btn-secondary myProfileBtn"
+                        style="background-color: #222222; border-color: #222222;"><i class="fa-regular fa-image"
+                            style="color: #20da98;"></i>Photos</button>
+                    <button type="button" class="btn btn-secondary myProfileBtn"
+                        style="background-color: #222222; border-color: #222222;"><i class="fa-solid fa-circle-play"
+                            style="color: #4e91f6;"></i>Videos</button>
+                    <button type="button" class="btn btn-secondary myProfileBtn"
+                        style="background-color: #222222; border-color: #222222;"><i class="fa-solid fa-briefcase"
+                            style="color: #e37070;"></i>Jobs</button>
+                    <button type="button" class="btn btn-secondary myProfileBtn"
+                        style="background-color: #222222; border-color: #222222;"><i class="fa-solid fa-newspaper"
+                            style="color: #ebbc64;"></i>Articles</button>
+                </div>
+            </div>
+
+
+
+            <!-- main post ka area -->
+
+
+
+            <div class="postArea">
+                <!-- <div class="postConatiner postInputContainer mt-3">
+                    <div class="d-flex justify-content-between ">
+                        <div class="authorsDetails d-flex align-items-center">
+                            <div class="post-header-container d-flex align-items-center">
+                                <div class="image">
+                                    <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+                                        alt="" class="img-fluid rounded mx-auto d-block">
+                                </div>
+                                <div class="userName-id ms-2">
+                                    <p class="mb-1 userTag" style="color: #868686; font-size: 12px;">
+                                        @${activeUser.firstName}</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <h5 class="mb-1 username">${activeUser.firstName}</h5>
+                                        <p class="mb-0 ms-2" style="color: #ffc107; font-size: 12px;">1 hour</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle"
+                                    style="background-color: #282828; border-color: #282828;" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu" style="background-color: #282828;">
+                                    <li><a class="dropdown-item">Edit</a></li>
+                                    <li><a class="dropdown-item">Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="postDetails">
+                        <p id="post-text" class="mt-2">${postTextArea.value}</p>
+                    </div>
+                    <div class="postImage-video">
+                        <img src="https://images.unsplash.com/photo-1635016288720-c52507b9a717?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
+                            alt="" class="img-fluid" style="object-fit: cover; width: 100%; border-radius: 15px;">
+                    </div>
+                    <div class="like-comment-share d-flex justify-content-start align-items-center mt-3">
+                        <i class="fa-solid fa-heart ms-3 fs-5"></i>
+                        <i class="fa-solid fa-comment ms-3 fs-5"></i>
+                        <i class="fa-solid fa-share ms-3 fs-5"></i>
+                    </div>
+                    <div
+                        class="comment-container d-flex align-items-center mt-3 border-top border-secondary-subtle pt-2">
+                        <div class="image">
+                            <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+                                alt="" class="img-fluid rounded mx-auto d-block">
+                        </div>
+                        <div class="search ps-3 " style="width: 100%;">
+                            <div class="input-group" style="width: 100%;">
+                                <input type="text" class="form-control" placeholder="Write your comment"
+                                    aria-label="Example text with button addon" aria-describedby="button-addon1"
+                                    id="comment">
+                                <button class="btn " type="button" id="button-addon1" style="background-color: #222;"><i
+                                        class="fa-solid fa-paper-plane" style="color: #636363;"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="right">
+            <h1>activity coming soon</h1>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script type="module" src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
