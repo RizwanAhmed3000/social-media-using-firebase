@@ -1,7 +1,4 @@
-const activeUser = JSON.parse(localStorage.getItem('activeUser'))
-const activeUserData = JSON.parse(localStorage.getItem('activeUserData')) || []
-
-
+import {auth, db, onAuthStateChanged, signOut, getDoc, doc} from "../firebaseConfig.js"
 
 const userName = document.querySelectorAll('.username')
 const userTag = document.querySelectorAll('.userTag')
@@ -12,35 +9,59 @@ console.log(postTextArea)
 
 
 
-if (!activeUser) {
-    window.location.href = "../index.html"
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const uid = user.uid;
+        console.log(uid)
+        getUserData(uid)
+    } else {
+        console.log(`Sign Out`)
+        window.location.href = '../index.html'
+    }
+});
+
+async function getUserData(uid) {
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        const {firstName, lastName} = docSnap.data()
+        console.log(firstName)
+        console.log(lastName)
+        userName.forEach((name)=>{
+            name.innerHTML = `${firstName} ${lastName}`
+        })
+        userTag.forEach((tag)=>{
+            tag.innerHTML = `@${firstName}`
+        })
+    } else {
+        console.log("No such document!");
+    }
+
 }
+
+logoutBtn.addEventListener('click', logoutHandler)
 
 function logoutHandler() {
-    localStorage.removeItem('activeUser')
-    window.location.href = "../index.html"
+    signOut(auth).then(() => {
+        console.log(`Sign-out successful`)
+        window.location.href = "../index.html"
+      }).catch((error) => {
+        console.error(error)
+      });
 }
 
-// myProfileBtn.addEventListener('click', ()=>{
-//     window.location.href = "../myProfile/index.html"
+
+
+// activeUserData.filter((item)=> item.userEmail == activeUser.emailAddress).forEach((item) => {
+
+//     let div = document.createElement('div')
+//     div.setAttribute('class', 'postConatiner postInputContainer mt-3')
+//     div.innerHTML = item.post
+//     postArea.appendChild(div)
+
 // })
-
-
-userName.forEach((user) => {
-    return user.textContent = `${activeUser.firstName} ${activeUser.lastName}`
-})
-userTag.forEach((user) => {
-    return user.textContent = `@${activeUser.firstName}`
-})
-
-activeUserData.filter((item)=> item.userEmail == activeUser.emailAddress).forEach((item) => {
-
-    let div = document.createElement('div')
-    div.setAttribute('class', 'postConatiner postInputContainer mt-3')
-    div.innerHTML = item.post
-    postArea.appendChild(div)
-
-})
 
 function postHandler() {
     let div = document.createElement('div')
