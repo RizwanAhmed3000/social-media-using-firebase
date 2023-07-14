@@ -46,6 +46,7 @@ function loginHandler() {
             const errorMessage = error.message;
             console.log(errorCode)
             console.log(errorMessage)
+            alert(`${errorMessage}`)
         });
 }
 
@@ -59,6 +60,7 @@ function signupHandler() {
             if (user) {
                 addUserHandler(user.uid)
                 emptyInput()
+                alert(`User register successful`)
             }
         })
         .catch((error) => {
