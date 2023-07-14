@@ -2,6 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebas
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, doc, setDoc, getDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
+//--------------------------FIREBASE CONFIG APNA USE KRO---------------------------------//
+
 const firebaseConfig = {
     apiKey: "AIzaSyDy0DBhbfPgJ3X0Gl3GGcuruxywWorAuxQ",
     authDomain: "social-media-app-3000.firebaseapp.com",
@@ -10,6 +12,8 @@ const firebaseConfig = {
     messagingSenderId: "521872056341",
     appId: "1:521872056341:web:8cdacf616b38650f12ee1c"
 };
+
+//--------------------------FIREBASE CONFIG APNA USE KRO---------------------------------//
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
