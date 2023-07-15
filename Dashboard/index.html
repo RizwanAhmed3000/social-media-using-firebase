@@ -51,7 +51,7 @@
                         <li><a class="dropdown-item" href="../myProfile/index.html">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="../friendsPage/friendsPage.html">friends</a></li>
-                        <li><a class="dropdown-item logoutBtn"  href="">Log out</a></li>
+                        <li><a class="dropdown-item logoutBtn" href="">Log out</a></li>
                     </ul>
                 </div>
             </div>
@@ -148,7 +148,7 @@
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
                                         <button type="button" data-bs-dismiss="modal" class="btn btn-warning"
-                                            onclick="postHandler()">Post</button>
+                                            id="postBtn">Post</button>
                                     </div>
                                 </div>
                             </div>
@@ -214,10 +214,6 @@
                     <div class="postDetails">
                         <p id="post-text" class="mt-2">${postTextArea.value}</p>
                     </div>
-                    <div class="postImage-video">
-                        <img src="https://images.unsplash.com/photo-1635016288720-c52507b9a717?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
-                            alt="" class="img-fluid" style="object-fit: cover; width: 100%; border-radius: 15px;">
-                    </div>
                     <div class="like-comment-share d-flex justify-content-start align-items-center mt-3">
                         <i class="fa-solid fa-heart ms-3 fs-5"></i>
                         <i class="fa-solid fa-comment ms-3 fs-5"></i>
@@ -241,18 +237,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-
-
-
-
-
-
-
-
-        <div class="right">
-            <h1>activity coming soon</h1>
         </div>
     </div>
 

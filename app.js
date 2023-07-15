@@ -14,7 +14,7 @@ let gender;
 
 
 // ------------------------Firebase connections-----------------------------------//
-import {auth, db, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, getFirestore, doc, setDoc} from "./firebaseConfig.js";
+import {auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, doc, setDoc} from "./firebaseConfig.js";
 
 creatAcctountBtn.addEventListener('click', signupHandler)
 loginBtn.addEventListener('click', loginHandler)

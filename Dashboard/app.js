@@ -1,5 +1,5 @@
 // ------------------------Firebase----------------------------//
-import { auth, db, onAuthStateChanged, signOut, getDoc, doc} from "../firebaseConfig.js"
+import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs } from "../firebaseConfig.js"
 
 
 const userName = document.querySelectorAll('.username')
@@ -8,64 +8,82 @@ const logoutBtn = document.querySelector('.logoutBtn')
 const postArea = document.querySelector('.postArea')
 const postTextArea = document.querySelector('#message-text')
 const myProfileBtn = document.querySelector('.myProfileBtn')
-console.log(postTextArea)
-
+const postBtn = document.querySelector('#postBtn')
+let loggedinUserId;
 
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
-        console.log(uid)
         getUserData(uid)
+        loggedinUserId = uid
     } else {
-        console.log(`Sign Out`)
         window.location.href = '../index.html'
     }
 });
+
+createPost()
 
 async function getUserData(uid) {
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        const {firstName, lastName} = docSnap.data()
-        console.log(firstName)
-        console.log(lastName)
-        userName.forEach((name)=>{
+        // console.log("Document data:", docSnap.data());
+        const { firstName, lastName, PhoneNumber, emailAddress } = docSnap.data()
+        userName.forEach((name) => {
             name.innerHTML = `${firstName} ${lastName}`
         })
-        userTag.forEach((tag)=>{
+        userTag.forEach((tag) => {
             tag.innerHTML = `@${firstName}`
         })
     } else {
         console.log("No such document!");
     }
-
 }
 
 logoutBtn.addEventListener('click', logoutHandler)
 
 function logoutHandler() {
     signOut(auth).then(() => {
-        console.log(`Sign-out successful`)
+        loggedinUserId = ``
         window.location.href = "../index.html"
-      }).catch((error) => {
+    }).catch((error) => {
         console.error(error)
-      });
+    });
 }
 
 myProfileBtn.addEventListener('click', () => {
     window.location.href = "../myProfile/index.html"
 })
 
+postBtn.addEventListener('click', postHandler)
 
 function postHandler() {
-    let div = document.createElement('div')
-    div.setAttribute('class', 'postConatiner postInputContainer mt-3')
+    storePost();
+    createPost()
 
+}
 
-    div.innerHTML = `<div class="d-flex justify-content-between ">
+async function storePost() {
+    const docRef = await addDoc(collection(db, "posts"), {
+        postContent: postTextArea.value,
+        author: loggedinUserId,
+    });
+}
+
+async function createPost() {
+    postArea.innerHTML = ``;
+    const querySnapshot = await getDocs(collection(db, "posts"));
+    querySnapshot.forEach(async (doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const {postContent, author} = doc.data()
+
+        const gettingUserData = await getAuthData(author)
+
+        let div = document.createElement('div')
+        div.setAttribute('class', 'postConatiner postInputContainer mt-3')
+        div.innerHTML = `<div class="d-flex justify-content-between ">
     <div class="authorsDetails d-flex align-items-center">
         <div class="post-header-container d-flex align-items-center">
             <div class="image">
@@ -74,9 +92,9 @@ function postHandler() {
             </div>
             <div class="userName-id ms-2">
                 <p class="mb-1 userTag" style="color: #868686; font-size: 12px;">
-                    @${activeUser.firstName}</p>
+                    @${gettingUserData?.firstName}</p>
                 <div class="d-flex align-items-center justify-content-center">
-                    <h5 class="mb-1 username">${activeUser.firstName}</h5>
+                    <h5 class="mb-1 username">${gettingUserData?.firstName}</h5>
                     <p class="mb-0 ms-2" style="color: #ffc107; font-size: 12px;">${new Date().toLocaleTimeString()}</p>
                 </div>
             </div>
@@ -97,11 +115,7 @@ function postHandler() {
     </div>
 </div>
 <div class="postDetails">
-    <p id="post-text" class="mt-2">${postTextArea.value}</p>
-</div>
-<div class="postImage-video">
-    <img src="https://images.unsplash.com/photo-1635016288720-c52507b9a717?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
-        alt="" class="img-fluid" style="object-fit: cover; width: 100%; border-radius: 15px;">
+    <p id="post-text" class="mt-2">${postContent}</p>
 </div>
 <div class="like-comment-share d-flex justify-content-start align-items-center mt-3">
     <i class="fa-solid fa-heart ms-3 fs-5"></i>
@@ -125,22 +139,18 @@ function postHandler() {
     </div>
 </div>
 </div>`
-
-
-    postArea.prepend(div)
-
-    const postObj = {
-        userEmail: activeUser.emailAddress,
-        post: div.innerHTML,
-        date: new Date(),
-        time: new Date().toLocaleTimeString()
-    }
-    activeUserData.unshift(postObj)
-    localStorage.setItem('activeUserData', JSON.stringify(activeUserData))
-    // console.log(activeUserData)
-    // console.log(activeUserData[0].post)
-    postTextArea.value = ""
-
+        postArea.prepend(div)
+        postTextArea.value = ""
+    });
 }
 
-// console.log(activeUserData[0])
+async function getAuthData(id){
+    const docRef = doc(db, "users", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        return docSnap.data()
+    } else {
+        console.log("No such document!");
+    }
+}
