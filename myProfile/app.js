@@ -1,5 +1,5 @@
 import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, query, where, getDocs } from "../firebaseConfig.js"
-import {postHandler} from "../Dashboard/app.js"
+// import {postHandler} from "../Dashboard/app.js"
 
 const userName = document.querySelectorAll('.username')
 const userTag = document.querySelectorAll('.userTag')
@@ -38,11 +38,10 @@ async function getUserData(uid) {
         userTag.forEach((tag) => {
             tag.innerHTML = `@${firstName}`
         })
-        getMyposts(loggedinUserId)
     } else {
         console.log("No such document!");
     }
-
+    getMyposts(uid)
 }
 
 
@@ -58,18 +57,9 @@ function logoutHandler() {
     });
 }
 
-
-
-// activeUserData.filter((item)=> item.userEmail == activeUser.emailAddress).forEach((item) => {
-
-//     let div = document.createElement('div')
-//     div.setAttribute('class', 'postConatiner postInputContainer mt-3')
-//     div.innerHTML = item.post
-//     postArea.appendChild(div)
-
-// })
-
 async function getMyposts(uid) {
+    console.log(uid, "==> uid form get my post function")
+    postArea.innerHTML == ``
 
     const q = query(collection(db, "posts"), where("author", "==", uid));
 
@@ -78,6 +68,7 @@ async function getMyposts(uid) {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
         const { postContent, author } = doc.data()
+        console.log(author, "==> author id for query")
 
         const activeUser = await getAuthData(author)
 
@@ -145,16 +136,16 @@ class="fa-solid fa-paper-plane" style="color: #636363;"></i></button>
 
         postArea.prepend(div)
 
-        postTextArea.value = ""
-
     });
 }
 
 async function getAuthData(id) {
+    console.log(id, "==> id for getAuthData")
     const docRef = doc(db, "users", id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
+        console.log(docSnap.data(), "==> data from getAuthData")
         return docSnap.data()
     } else {
         console.log("No such document!");
