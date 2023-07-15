@@ -154,3 +154,5 @@ async function getAuthData(id){
         console.log("No such document!");
     }
 }
+
+export {postHandler, createPost, storePost}
