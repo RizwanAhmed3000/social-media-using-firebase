@@ -7,9 +7,12 @@ const logoutBtn = document.querySelector('.logoutBtn')
 const postArea = document.querySelector('.postArea')
 const postTextArea = document.querySelector('#message-text')
 const postBtn = document.querySelector('#postBtn')
-console.log(postTextArea)
+const profilePicture = document.querySelector('#profilePic')
+const inputPostProfilePic = document.querySelector('#inputPostProfilePic')
+const descriptionHtml = document.querySelector('#descriptionHtml')
+console.log(profilePicture, "==>> pro pi")
 let loggedinUserId;
-
+let profileImage;
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -29,7 +32,7 @@ async function getUserData(uid) {
     
     if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
-        const { firstName, lastName } = docSnap.data()
+        const { firstName, lastName, profilePicture: profilePictureFromDb, description } = docSnap.data()
         console.log(firstName)
         console.log(lastName)
         userName.forEach((name) => {
@@ -38,6 +41,13 @@ async function getUserData(uid) {
         userTag.forEach((tag) => {
             tag.innerHTML = `@${firstName}`
         })
+        profileImage = profilePictureFromDb
+        // profilePicture.forEach((pic) => {
+        //     pic.src = profilePictureFromDb
+        // })
+        profilePic.src = profilePictureFromDb
+        inputPostProfilePic.src = profilePictureFromDb
+        descriptionHtml.textContent = description
     } else {
         console.log("No such document!");
     }
@@ -80,7 +90,7 @@ async function getMyposts(uid) {
     <div class="authorsDetails d-flex align-items-center">
         <div class="post-header-container d-flex align-items-center">
             <div class="image">
-                <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+                <img src=${profileImage}
                     alt="" class="img-fluid rounded mx-auto d-block">
             </div>
             <div class="userName-id ms-2">
@@ -118,7 +128,7 @@ async function getMyposts(uid) {
 <div
 class="comment-container d-flex align-items-center mt-3 border-top border-secondary-subtle pt-2">
 <div class="image">
-<img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+<img src=${profileImage}
 alt="" class="img-fluid rounded mx-auto d-block">
 </div>
 <div class="search ps-3 " style="width: 100%;">

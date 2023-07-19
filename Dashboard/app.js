@@ -9,6 +9,8 @@ const postArea = document.querySelector('.postArea')
 const postTextArea = document.querySelector('#message-text')
 const myProfileBtn = document.querySelector('.myProfileBtn')
 const postBtn = document.querySelector('#postBtn')
+// const profilePic = document.querySelector('#profilePicture')
+// console.log(profilePic, "==>> profile pic")
 let loggedinUserId;
 
 
@@ -29,14 +31,15 @@ async function getUserData(uid) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data());
-        const { firstName, lastName, PhoneNumber, emailAddress } = docSnap.data()
+        console.log("Document data:", docSnap.data());
+        const { firstName, lastName, PhoneNumber, emailAddress, profilePicture } = docSnap.data()
         userName.forEach((name) => {
             name.innerHTML = `${firstName} ${lastName}`
         })
         userTag.forEach((tag) => {
             tag.innerHTML = `@${firstName}`
         })
+        profilePic.src = profilePicture
     } else {
         console.log("No such document!");
     }
