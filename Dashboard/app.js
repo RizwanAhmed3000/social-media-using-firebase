@@ -9,7 +9,7 @@ const postArea = document.querySelector('.postArea')
 const postTextArea = document.querySelector('#message-text')
 const myProfileBtn = document.querySelector('.myProfileBtn')
 const postBtn = document.querySelector('#postBtn')
-// const profilePic = document.querySelector('#profilePicture')
+const profilePic = document.querySelector('#profileP')
 // console.log(profilePic, "==>> profile pic")
 let loggedinUserId;
 
@@ -90,7 +90,7 @@ async function createPost() {
     <div class="authorsDetails d-flex align-items-center">
         <div class="post-header-container d-flex align-items-center">
             <div class="image">
-                <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+                <img src=${gettingUserData.profilePicture || "https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"}
                     alt="" class="img-fluid rounded mx-auto d-block">
             </div>
             <div class="userName-id ms-2">
