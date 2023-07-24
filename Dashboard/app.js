@@ -12,6 +12,7 @@ const postBtn = document.querySelector('#postBtn')
 const profilePic = document.querySelector('#profileP')
 // console.log(profilePic, "==>> profile pic")
 let loggedinUserId;
+let loggedinUser;
 
 
 onAuthStateChanged(auth, (user) => {
