@@ -1,5 +1,5 @@
 // ------------------------Firebase----------------------------//
-import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL } from "../firebaseConfig.js"
+import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL, deleteDoc } from "../firebaseConfig.js"
 
 
 const userName = document.querySelectorAll('.username')
@@ -154,6 +154,7 @@ async function createPost() {
     postArea.innerHTML = ``;
     const querySnapshot = await getDocs(collection(db, "posts"));
     querySnapshot.forEach(async (doc) => {
+        let postId = doc.id
         // doc.data() is never undefined for query doc snapshots
         const { postContent, author, postImageUrl } = doc.data()
 
@@ -186,8 +187,8 @@ async function createPost() {
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <ul class="dropdown-menu" style="background-color: #282828;">
-            <li><a class="dropdown-item">Edit</a></li>
-            <li><a class="dropdown-item">Delete</a></li>
+            <li><a class="dropdown-item" onclick="editPostHandler('${postId}')">Edit</a></li>
+            <li><a class="dropdown-item" onclick="deletePostHandler('${postId}')">Delete</a></li>
         </ul>
     </div>` : ""}
         
@@ -237,5 +238,19 @@ async function getAuthData(id) {
         console.log("No such document!");
     }
 }
+
+// function editPostHandler (postId) {
+
+// }
+async function deletePostHandler (postId) {
+    await deleteDoc(doc(db, "posts", postId));
+    alert("Your post has been deleted");
+    createPost();
+}
+
+
+
+// window.editPostHandler = editPostHandler;
+window.deletePostHandler = deletePostHandler;
 
 // export { postHandler, createPost, storePost }
