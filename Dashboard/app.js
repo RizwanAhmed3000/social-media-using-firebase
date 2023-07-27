@@ -1,5 +1,5 @@
 // ------------------------Firebase----------------------------//
-import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs } from "../firebaseConfig.js"
+import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL } from "../firebaseConfig.js"
 
 
 const userName = document.querySelectorAll('.username')
@@ -9,10 +9,11 @@ const postArea = document.querySelector('.postArea')
 const postTextArea = document.querySelector('#message-text')
 const myProfileBtn = document.querySelector('.myProfileBtn')
 const postBtn = document.querySelector('#postBtn')
-const profilePic = document.querySelector('#profileP')
-// console.log(profilePic, "==>> profile pic")
+const profilePic = document.querySelectorAll('.profileP')
+const profileDescription = document.querySelector('#profileDescription')
+const uploadPhoto = document.querySelector('#uploadPhotoBtn')
 let loggedinUserId;
-let loggedinUser;
+let loggedinUserPp;
 
 
 onAuthStateChanged(auth, (user) => {
@@ -33,14 +34,18 @@ async function getUserData(uid) {
 
     if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
-        const { firstName, lastName, PhoneNumber, emailAddress, profilePicture } = docSnap.data()
+        const { firstName, lastName, profilePicture, description } = docSnap.data()
         userName.forEach((name) => {
             name.innerHTML = `${firstName} ${lastName}`
         })
         userTag.forEach((tag) => {
             tag.innerHTML = `@${firstName}`
         })
-        profilePic.src = profilePicture
+        profilePic.forEach((profileP) => {
+            profileP.src = profilePicture
+        })
+        loggedinUserPp = profilePicture
+        profileDescription.textContent = description || "No description added"
     } else {
         console.log("No such document!");
     }
@@ -64,24 +69,93 @@ myProfileBtn.addEventListener('click', () => {
 postBtn.addEventListener('click', postHandler)
 
 function postHandler() {
-    storePost();
-    createPost()
-
+    if (postTextArea.value || uploadPhoto.files[0]) {
+        storePostAndCreatePostHandler();
+    } else{
+        alert('There is nothing to post')
+    }
 }
 
-async function storePost() {
-    const docRef = await addDoc(collection(db, "posts"), {
-        postContent: postTextArea.value,
-        author: loggedinUserId,
-    });
+async function storePostAndCreatePostHandler() {
+    const file = uploadPhoto.files[0];
+
+    if (file) {
+
+
+        // Create the file metadata
+        /** @type {any} */
+        const metadata = {
+            contentType: 'image/jpeg'
+        };
+
+        // Upload file and metadata to the object 'images/mountains.jpg'
+        const storageRef = ref(storage, 'postImages/' + file.name);
+        const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+        // Listen for state changes, errors, and completion of the upload.
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                    case 'running':
+                        console.log('Upload is running');
+                        break;
+                }
+            },
+            (error) => {
+                // A full list of error codes is available at
+                // https://firebase.google.com/docs/storage/web/handle-errors
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        // User doesn't have permission to access the object
+                        break;
+                    case 'storage/canceled':
+                        // User canceled the upload
+                        break;
+
+                    // ...
+
+                    case 'storage/unknown':
+                        // Unknown error occurred, inspect error.serverResponse
+                        break;
+                }
+            },
+            () => {
+                // Upload completed successfully, now we can get the download URL
+                getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                    console.log('File available at', downloadURL);
+                    const docRef = await addDoc(collection(db, "posts"), {
+                        postContent: postTextArea.value,
+                        author: loggedinUserId,
+                        postImageUrl: downloadURL
+                    });
+                    createPost()
+                });
+            }
+        );
+    } else {
+        const docRef = await addDoc(collection(db, "posts"), {
+            postContent: postTextArea.value,
+            author: loggedinUserId,
+        });
+        createPost()
+    }
 }
+
+
+
 
 async function createPost() {
     postArea.innerHTML = ``;
     const querySnapshot = await getDocs(collection(db, "posts"));
     querySnapshot.forEach(async (doc) => {
         // doc.data() is never undefined for query doc snapshots
-        const {postContent, author} = doc.data()
+        const { postContent, author, postImageUrl } = doc.data()
 
         const gettingUserData = await getAuthData(author)
 
@@ -121,6 +195,9 @@ async function createPost() {
 <div class="postDetails">
     <p id="post-text" class="mt-2">${postContent}</p>
 </div>
+<div class="imgBox">
+        <img src=${postImageUrl} alt="" id="postImage">
+</div>
 <div class="like-comment-share d-flex justify-content-start align-items-center mt-3">
     <i class="fa-solid fa-heart ms-3 fs-5"></i>
     <i class="fa-solid fa-comment ms-3 fs-5"></i>
@@ -129,7 +206,7 @@ async function createPost() {
 <div
     class="comment-container d-flex align-items-center mt-3 border-top border-secondary-subtle pt-2">
     <div class="image">
-        <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+        <img src=${loggedinUserPp || "https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"}
             alt="" class="img-fluid rounded mx-auto d-block">
     </div>
     <div class="search ps-3 " style="width: 100%;">
@@ -148,7 +225,7 @@ async function createPost() {
     });
 }
 
-async function getAuthData(id){
+async function getAuthData(id) {
     const docRef = doc(db, "users", id);
     const docSnap = await getDoc(docRef);
 
@@ -159,4 +236,4 @@ async function getAuthData(id){
     }
 }
 
-export {postHandler, createPost, storePost}
+// export { postHandler, createPost, storePost }

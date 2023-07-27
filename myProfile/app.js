@@ -77,7 +77,7 @@ async function getMyposts(uid) {
     querySnapshot.forEach(async (doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
-        const { postContent, author } = doc.data()
+        const { postContent, author, postImageUrl } = doc.data()
         console.log(author, "==> author id for query")
 
         const activeUser = await getAuthData(author)
@@ -119,6 +119,9 @@ async function getMyposts(uid) {
 </div>
 <div class="postDetails">
 <p id="post-text" class="mt-2">${postContent}</p>
+</div>
+<div class="imgBox">
+        <img src=${postImageUrl} alt="" id="postImage">
 </div>
 <div class="like-comment-share d-flex justify-content-start align-items-center mt-3">
 <i class="fa-solid fa-heart ms-3 fs-5"></i>

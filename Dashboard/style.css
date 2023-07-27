@@ -154,6 +154,19 @@ body {
 #comment{
     background-color: #222;
 }
+
+.imgBox{
+    width: 100%;
+}
+
+#postImage{
+    width: 100%;
+}
+
+#uploadDiv{
+    width: 69%;
+}
+
 @media(max-width: 1024px){
     .profile{
         width: 100% !important;
