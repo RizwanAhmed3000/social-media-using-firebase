@@ -179,17 +179,19 @@ async function createPost() {
         </div>
     </div>
     <div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle"
-                style="background-color: #282828; border-color: #282828;" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-            </button>
-            <ul class="dropdown-menu" style="background-color: #282828;">
-                <li><a class="dropdown-item">Edit</a></li>
-                <li><a class="dropdown-item">Delete</a></li>
-            </ul>
-        </div>
+        ${author === loggedinUserId ? `<div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle"
+            style="background-color: #282828; border-color: #282828;" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <ul class="dropdown-menu" style="background-color: #282828;">
+            <li><a class="dropdown-item">Edit</a></li>
+            <li><a class="dropdown-item">Delete</a></li>
+        </ul>
+    </div>` : ""}
+        
+
     </div>
 </div>
 <div class="postDetails">
