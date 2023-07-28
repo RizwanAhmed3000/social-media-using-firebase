@@ -1,5 +1,5 @@
 // ------------------------Firebase----------------------------//
-import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL, deleteDoc } from "../firebaseConfig.js"
+import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL, deleteDoc, updateDoc } from "../firebaseConfig.js"
 
 
 const userName = document.querySelectorAll('.username')
@@ -11,9 +11,10 @@ const myProfileBtn = document.querySelector('.myProfileBtn')
 const postBtn = document.querySelector('#postBtn')
 const profilePic = document.querySelectorAll('.profileP')
 const profileDescription = document.querySelector('#profileDescription')
-const uploadPhoto = document.querySelector('#uploadPhotoBtn')
+let uploadPhoto = document.querySelector('#uploadPhotoBtn')
 let loggedinUserId;
 let loggedinUserPp;
+let postIdGlobal;
 
 
 onAuthStateChanged(auth, (user) => {
@@ -71,7 +72,7 @@ postBtn.addEventListener('click', postHandler)
 function postHandler() {
     if (postTextArea.value || uploadPhoto.files[0]) {
         storePostAndCreatePostHandler();
-    } else{
+    } else {
         alert('There is nothing to post')
     }
 }
@@ -135,6 +136,7 @@ async function storePostAndCreatePostHandler() {
                         postImageUrl: downloadURL
                     });
                     createPost()
+                    uploadPhoto.files = null
                 });
             }
         );
@@ -187,7 +189,7 @@ async function createPost() {
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <ul class="dropdown-menu" style="background-color: #282828;">
-            <li><a class="dropdown-item" onclick="editPostHandler('${postId}')">Edit</a></li>
+            <li><button type="button" class="btn btn-primary dropdown-item editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat" onclick="editPostHandler('${postId}')">Edit</button></li>
             <li><a class="dropdown-item" onclick="deletePostHandler('${postId}')">Delete</a></li>
         </ul>
     </div>` : ""}
@@ -239,18 +241,108 @@ async function getAuthData(id) {
     }
 }
 
-// function editPostHandler (postId) {
+function editPostHandler(postId) {
+    console.log("edit btn working", "==>", postId)
+    postBtn.removeEventListener('click', postHandler);
+    postBtn.addEventListener('click', updatePostHandler)
+    postIdGlobal = postId
 
-// }
-async function deletePostHandler (postId) {
+}
+
+async function deletePostHandler(postId) {
     await deleteDoc(doc(db, "posts", postId));
     alert("Your post has been deleted");
     createPost();
 }
 
+async function updatePostHandler() {
+    console.log("update post handler working")
+    const file = uploadPhoto.files[0];
+
+    if (file) {
 
 
-// window.editPostHandler = editPostHandler;
+        // Create the file metadata
+        /** @type {any} */
+        const metadata = {
+            contentType: 'image/jpeg'
+        };
+
+        // Upload file and metadata to the object 'images/mountains.jpg'
+        const storageRef = ref(storage, 'postImages/' + file.name);
+        const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+        // Listen for state changes, errors, and completion of the upload.
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                    case 'running':
+                        console.log('Upload is running');
+                        break;
+                }
+            },
+            (error) => {
+                // A full list of error codes is available at
+                // https://firebase.google.com/docs/storage/web/handle-errors
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        // User doesn't have permission to access the object
+                        break;
+                    case 'storage/canceled':
+                        // User canceled the upload
+                        break;
+
+                    // ...
+
+                    case 'storage/unknown':
+                        // Unknown error occurred, inspect error.serverResponse
+                        break;
+                }
+            },
+            () => {
+                // Upload completed successfully, now we can get the download URL
+                getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                    console.log('File available at', downloadURL);
+                    const washingtonRef = doc(db, "posts", postIdGlobal);
+
+                    // Set the "capital" field of the city 'DC'
+                    await updateDoc(washingtonRef, {
+                        postContent: postTextArea.value,
+                        author: loggedinUserId,
+                        postImageUrl: downloadURL
+                    });
+
+                    createPost()
+                    postBtn.removeEventListener('click', updatePostHandler);
+                    postBtn.addEventListener('click', postHandler);
+                    uploadPhoto.files = null
+                });
+            }
+        );
+    } else {
+        const washingtonRef = doc(db, "posts", postIdGlobal);
+
+        // Set the "capital" field of the city 'DC'
+        await updateDoc(washingtonRef, {
+            postContent: postTextArea.value,
+            author: loggedinUserId,
+        });
+
+        createPost()
+        postBtn.removeEventListener('click', updatePostHandler);
+        postBtn.addEventListener('click', postHandler);
+    }
+
+}
+
+
+window.editPostHandler = editPostHandler;
 window.deletePostHandler = deletePostHandler;
 
 // export { postHandler, createPost, storePost }
