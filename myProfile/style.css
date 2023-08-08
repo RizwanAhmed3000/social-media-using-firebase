@@ -24,6 +24,10 @@ body {
     color: #ffc107;
 }
 
+a.active i {
+    color: #ffc107 !important;
+}
+
 .search input, #message-text {
     background-color: #282828;
     color: #fafafa;
@@ -100,14 +104,14 @@ body {
     height: 2px;
     background-color: #1a1a1a;
 }
-
+/* 
 .myProfileBtn{
     transition: background-color 200ms ease, border-color 200ms ease;
 }
 .myProfileBtn:hover{
     background-color: #1a1a1a !important;
     border-color: #1a1a1a !important;
-}
+} */
 
 /* .mid{
     background-color: #ffc107;
@@ -164,6 +168,11 @@ body {
 
 #postImage{
     width: 100%;
+}
+
+#editProfileBtn a{
+    color: #fafafa;
+    text-decoration: none;
 }
 
 @media(max-width: 1024px){

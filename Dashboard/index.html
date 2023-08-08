@@ -15,7 +15,7 @@
 
 <body>
 
-    <!-- NAVBAR -->
+    <!-------------------------- NAVBAR ------------------------------------->
 
     <nav class="NavBar">
         <div class="container-fluid d-flex justify-content-between align-items-center" style="padding: 1rem 0;">
@@ -34,9 +34,9 @@
                 </div>
             </div>
             <div class="container-fluid navigation d-flex justify-content-center align-items-center">
-                <a href="#"><i class="fa-solid fa-house px-4 fs-5"></i></a>
+                <a href="#" id="homeNavBtn" class="active"><i class="fa-solid fa-house px-4 fs-5"></i></a>
                 <a href="#"><i class="fa-regular fa-comment px-4 fs-5"></i></a>
-                <a href="../myProfile/index.html"><i class="fa-solid fa-user px-4 fs-5"></i></i></a>
+                <a href="../myProfile/index.html" id="myProfileNavBtn"><i class="fa-solid fa-user px-4 fs-5"></i></i></a>
                 <a href="#"><i class="fa-regular fa-bell px-4 fs-5"></i></a>
                 <a href="#"><i class="fa-regular fa-heart px-4 fs-5"></i></a>
             </div>
@@ -60,10 +60,13 @@
 
 
 
-    <!-- main dash -->
+    <!--------------------------------- MAIN DASHBOARD ------------------------------>
 
 
     <div class="mainBody container-fluid my-4 d-flex">
+
+        <!-- --------------PROFILE CARD---------------------- -->
+
         <div class="left d-flex flex-column">
             <div class="card profile"
                 style="width: 100%; height: 400px; border-radius: 15px; position: relative;border: none; ">
@@ -99,13 +102,17 @@
                             amet consectetur adipisicing elit. Temporibus error debitis quas corporis odio autem.</p>
                     </div>
                     <div class="line"></div>
-                    <button type="button" class="btn btn-secondary myProfileBtn"
-                        style="background-color: #2f2e2e; border-color: #2f2e2e;">My Profile</button>
+                    <button type="button" class="btn btn-outline-warning myProfileBtn">My Profile</button>
                 </div>
             </div>
         </div>
+
+        <!-- ---------------------MID SECTION ------------------------------------- -->
+
         <div class="mid postSection">
-            <!-- post input ka container -->
+
+            <!-------------------- post input ka container ---------------------------->
+
             <div class="postInputContainer container">
                 <div class="postInputField d-flex justify-content-center align-items-center">
                     <div class="image">
@@ -162,24 +169,20 @@
                     </div>
                 </div>
                 <div class="btnOptions d-flex justify-content-between align-items-center mt-3">
-                    <button type="button" class="btn btn-secondary myProfileBtn"
-                        style="background-color: #222222; border-color: #222222;"><i class="fa-regular fa-image"
-                            style="color: #20da98;"></i>Photos</button>
-                    <button type="button" class="btn btn-secondary myProfileBtn"
-                        style="background-color: #222222; border-color: #222222;"><i class="fa-solid fa-circle-play"
-                            style="color: #4e91f6;"></i>Videos</button>
-                    <button type="button" class="btn btn-secondary myProfileBtn"
-                        style="background-color: #222222; border-color: #222222;"><i class="fa-solid fa-briefcase"
-                            style="color: #e37070;"></i>Jobs</button>
-                    <button type="button" class="btn btn-secondary myProfileBtn"
-                        style="background-color: #222222; border-color: #222222;"><i class="fa-solid fa-newspaper"
-                            style="color: #ebbc64;"></i>Articles</button>
+                    <button type="button" class="btn btn-outline-warning myProfileBtn"><i
+                            class="fa-regular fa-image"></i>Photos</button>
+                    <button type="button" class="btn btn-outline-warning myProfileBtn"><i
+                            class="fa-solid fa-circle-play"></i>Videos</button>
+                    <button type="button" class="btn btn-outline-warning myProfileBtn"><i
+                            class="fa-solid fa-briefcase"></i>Jobs</button>
+                    <button type="button" class="btn btn-outline-warning myProfileBtn"><i
+                            class="fa-solid fa-newspaper"></i>Articles</button>
                 </div>
             </div>
 
 
 
-            <!-- main post ka area -->
+            <!---------------------- main post ka area -------------------------------------->
 
 
 
@@ -210,8 +213,10 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu" style="background-color: #282828;">
-                                    <li><button type="button" class="btn btn-primary dropdown-item editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Edit</button>
-                                    
+                                    <li><button type="button" class="btn btn-primary dropdown-item editBtn"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            data-bs-whatever="@fat">Edit</button>
+
                                     <li><a class="dropdown-item">Delete</a></li>
                                 </ul>
                             </div>
