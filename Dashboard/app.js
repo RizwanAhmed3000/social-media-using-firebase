@@ -1,5 +1,5 @@
 // ------------------------Firebase----------------------------//
-import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL, deleteDoc, updateDoc } from "../firebaseConfig.js"
+import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL, deleteDoc, updateDoc, serverTimestamp, orderBy, query } from "../firebaseConfig.js"
 
 
 const userName = document.querySelectorAll('.username')
@@ -133,7 +133,8 @@ async function storePostAndCreatePostHandler() {
                     const docRef = await addDoc(collection(db, "posts"), {
                         postContent: postTextArea.value,
                         author: loggedinUserId,
-                        postImageUrl: downloadURL
+                        postImageUrl: downloadURL,
+                        timestamp: serverTimestamp()
                     });
                     createPost()
                     uploadPhoto.files = null
@@ -144,6 +145,7 @@ async function storePostAndCreatePostHandler() {
         const docRef = await addDoc(collection(db, "posts"), {
             postContent: postTextArea.value,
             author: loggedinUserId,
+            timestamp: serverTimestamp()
         });
         createPost()
     }
@@ -154,11 +156,15 @@ async function storePostAndCreatePostHandler() {
 
 async function createPost() {
     postArea.innerHTML = ``;
-    const querySnapshot = await getDocs(collection(db, "posts"));
+    const postsCollectionRef = collection(db, "posts");
+
+    // Create a query to order the documents by "time" field in descending order
+    const sortedQuery = query(postsCollectionRef, orderBy("timestamp", "asc")); // "desc"
+    const querySnapshot = await getDocs(sortedQuery);
     querySnapshot.forEach(async (doc) => {
         let postId = doc.id
         // doc.data() is never undefined for query doc snapshots
-        const { postContent, author, postImageUrl } = doc.data()
+        const { postContent, author, postImageUrl, timestamp } = doc.data()
 
         const gettingUserData = await getAuthData(author)
 
@@ -176,7 +182,7 @@ async function createPost() {
                     @${gettingUserData?.firstName}</p>
                 <div class="d-flex align-items-center justify-content-center">
                     <h5 class="mb-1 username">${gettingUserData?.firstName}</h5>
-                    <p class="mb-0 ms-2" style="color: #ffc107; font-size: 12px;">${new Date().toLocaleTimeString()}</p>
+                    <p class="mb-0 ms-2" style="color: #ffc107; font-size: 12px;">${new Date(timestamp.seconds * 1000) }</p>
                 </div>
             </div>
         </div>
@@ -315,7 +321,8 @@ async function updatePostHandler() {
                     await updateDoc(washingtonRef, {
                         postContent: postTextArea.value,
                         author: loggedinUserId,
-                        postImageUrl: downloadURL
+                        postImageUrl: downloadURL,
+                        timestamp: serverTimestamp()
                     });
 
                     createPost()
@@ -332,6 +339,7 @@ async function updatePostHandler() {
         await updateDoc(washingtonRef, {
             postContent: postTextArea.value,
             author: loggedinUserId,
+            timestamp: serverTimestamp()
         });
 
         createPost()
