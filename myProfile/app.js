@@ -1,4 +1,4 @@
-import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, query, where, getDocs } from "../firebaseConfig.js"
+import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, query, where, getDocs, serverTimestamp, orderBy, storage, ref, uploadBytesResumable, getDownloadURL, deleteDoc, updateDoc, } from "../firebaseConfig.js"
 // import {postHandler} from "../Dashboard/app.js"
 
 const userName = document.querySelectorAll('.username')
@@ -56,7 +56,7 @@ async function getUserData(uid) {
 
 
 logoutBtn.addEventListener('click', logoutHandler)
-postBtn.addEventListener('click', postHandler)
+// postBtn.addEventListener('click', postHandler)
 
 function logoutHandler() {
     signOut(auth).then(() => {
@@ -71,13 +71,18 @@ async function getMyposts(uid) {
     console.log(uid, "==> uid form get my post function")
     postArea.innerHTML == ``
 
+    // const postsCollectionRef = collection(db, "posts");
+
+    // Create a query to order the documents by "time" field in descending order
+    // const sortedQuery = query(postsCollectionRef, orderBy("timestamp", "asc"))
+
     const q = query(collection(db, "posts"), where("author", "==", uid));
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(async (doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
-        const { postContent, author, postImageUrl } = doc.data()
+        const { postContent, author, postImageUrl, timestamp } = doc.data()
         console.log(author, "==> author id for query")
 
         const activeUser = await getAuthData(author)
@@ -98,7 +103,7 @@ async function getMyposts(uid) {
             @${activeUser.firstName}</p>
             <div class="d-flex align-items-center justify-content-center">
             <h5 class="mb-1 username">${activeUser.firstName}</h5>
-            <p class="mb-0 ms-2" style="color: #ffc107; font-size: 12px;">time</p>
+            <p class="mb-0 ms-2" style="color: #ffc107; font-size: 12px;">${timestamp}</p>
             </div>
             </div>
             </div>
