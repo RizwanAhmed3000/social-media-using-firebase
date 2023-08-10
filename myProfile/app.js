@@ -10,14 +10,17 @@ const postBtn = document.querySelector('#postBtn')
 const profilePicture = document.querySelector('#profilePic')
 const inputPostProfilePic = document.querySelector('#inputPostProfilePic')
 const descriptionHtml = document.querySelector('#descriptionHtml')
-console.log(profilePicture, "==>> pro pi")
+const followerCounter = document.querySelector('#followerCounter')
+const followingCounter = document.querySelector('#followingCounter')
+// console.log(profilePicture, "==>> pro pi")
 let loggedinUserId;
 let profileImage;
+// console.log(followerCounter, followingCounter)
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
-        console.log(uid)
+        // console.log(uid)
         getUserData(uid)
         loggedinUserId = uid;
     } else {
@@ -31,10 +34,10 @@ async function getUserData(uid) {
     const docSnap = await getDoc(docRef);
     
     if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        const { firstName, lastName, profilePicture: profilePictureFromDb, description } = docSnap.data()
-        console.log(firstName)
-        console.log(lastName)
+        // console.log("Document data:", docSnap.data());
+        const { firstName, lastName, profilePicture: profilePictureFromDb, description, following, followers } = docSnap.data()
+        // console.log(firstName)
+        // console.log(lastName)
         userName.forEach((name) => {
             name.innerHTML = `${firstName} ${lastName}`
         })
@@ -48,6 +51,9 @@ async function getUserData(uid) {
         profilePic.src = profilePictureFromDb
         inputPostProfilePic.src = profilePictureFromDb
         descriptionHtml.textContent = description
+        const realFollowings = following.length - 1;
+        followingCounter.innerHTML = realFollowings;
+        followerCounter.innerHTML = followers.length || '0000'
     } else {
         console.log("No such document!");
     }
@@ -68,7 +74,7 @@ function logoutHandler() {
 }
 
 async function getMyposts(uid) {
-    console.log(uid, "==> uid form get my post function")
+    // console.log(uid, "==> uid form get my post function")
     postArea.innerHTML == ``
 
     // const postsCollectionRef = collection(db, "posts");
@@ -81,9 +87,9 @@ async function getMyposts(uid) {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(async (doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
         const { postContent, author, postImageUrl, timestamp } = doc.data()
-        console.log(author, "==> author id for query")
+        // console.log(author, "==> author id for query")
 
         const activeUser = await getAuthData(author)
 
@@ -95,7 +101,7 @@ async function getMyposts(uid) {
     <div class="authorsDetails d-flex align-items-center">
         <div class="post-header-container d-flex align-items-center">
             <div class="image">
-                <img src=${profileImage}
+                <img src=${profileImage || 'https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691'}
                     alt="" class="img-fluid rounded mx-auto d-block">
             </div>
             <div class="userName-id ms-2">
@@ -158,12 +164,12 @@ class="fa-solid fa-paper-plane" style="color: #636363;"></i></button>
 }
 
 async function getAuthData(id) {
-    console.log(id, "==> id for getAuthData")
+    // console.log(id, "==> id for getAuthData")
     const docRef = doc(db, "users", id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        console.log(docSnap.data(), "==> data from getAuthData")
+        // console.log(docSnap.data(), "==> data from getAuthData")
         return docSnap.data()
     } else {
         console.log("No such document!");

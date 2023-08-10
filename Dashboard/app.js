@@ -11,10 +11,14 @@ const myProfileBtn = document.querySelector('.myProfileBtn')
 const postBtn = document.querySelector('#postBtn')
 const profilePic = document.querySelectorAll('.profileP')
 const profileDescription = document.querySelector('#profileDescription')
+const followersCounter = document.querySelector('#followerCounter')
+const followingsCounter = document.querySelector('#followingCounter')
 let uploadPhoto = document.querySelector('#uploadPhotoBtn')
 let loggedinUserId;
 let loggedinUserPp;
 let postIdGlobal;
+
+console.log(followersCounter, followingsCounter)
 
 
 onAuthStateChanged(auth, (user) => {
@@ -35,7 +39,7 @@ async function getUserData(uid) {
 
     if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
-        const { firstName, lastName, profilePicture, description } = docSnap.data()
+        const { firstName, lastName, profilePicture, description, following, followers } = docSnap.data()
         userName.forEach((name) => {
             name.innerHTML = `${firstName} ${lastName}`
         })
@@ -47,6 +51,9 @@ async function getUserData(uid) {
         })
         loggedinUserPp = profilePicture
         profileDescription.textContent = description || "No description added"
+        const realFollowings = following.length-1;
+        followingsCounter.innerHTML = realFollowings
+        followersCounter.innerHTML = followers.length || '0000'
     } else {
         console.log("No such document!");
     }

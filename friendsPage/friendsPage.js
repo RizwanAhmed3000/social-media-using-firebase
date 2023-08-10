@@ -70,12 +70,15 @@ async function getAllUser() {
 getAllUser();
 
 async function followHandler(userFirstName, followingUid, userLastName) {
+    console.log(followingUid, '==>> following user uid');
+    console.log(loggedinUserId, '==>> logged in user uid');
     const washingtonRef = doc(db, "users", loggedinUserId);
     if (!myFollowings.includes(`${followingUid}`)) {
         await updateDoc(washingtonRef, {
             following: arrayUnion(`${followingUid}`)
         });
         alert(`you are now following ${userFirstName} ${userLastName}`)
+        savingFollowersToOtherUser(followingUid, loggedinUserId);
         getUserData(loggedinUserId)
         return
     } else {
@@ -83,8 +86,22 @@ async function followHandler(userFirstName, followingUid, userLastName) {
             following: arrayRemove(`${followingUid}`)
         });
         alert(`you have unfollowed ${userFirstName} ${userLastName}`)
+        removingFollowersFromOtherUser(followingUid, loggedinUserId)
         getUserData(loggedinUserId)
     }
+}
+
+async function savingFollowersToOtherUser(followingUid, currentUserUid){
+    const washingtonRef = doc(db, "users", followingUid);
+    await updateDoc(washingtonRef, {
+        followers: arrayUnion(`${currentUserUid}`)
+    });
+}
+async function removingFollowersFromOtherUser(followingUid, currentUserUid){
+    const washingtonRef = doc(db, "users", followingUid);
+    await updateDoc(washingtonRef, {
+        followers: arrayRemove(`${currentUserUid}`)
+    });
 }
 
 window.followHandler = followHandler;
