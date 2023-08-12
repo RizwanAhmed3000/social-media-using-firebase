@@ -15,16 +15,16 @@
 
 <body>
 
-    <!-------------------------- NAVBAR ------------------------------------->
+    <!-------------------------- NAVBAR --------------------------.----------->
 
     <nav class="NavBar">
-        <div class="container-fluid d-flex justify-content-between align-items-center" style="padding: 1rem 0;">
-            <div class="container-fluid logo-search d-flex align-items-center">
+        <div class="navContainer container-fluid d-flex justify-content-between align-items-center" style="padding: 1rem 0;">
+            <div class=" logo-search d-flex ">
                 <div class="logo">
                     <h4 style="color: #fafafa;">logo</h4>
                     <!-- <img src="" alt=""> -->
                 </div>
-                <div class="search ps-3 ">
+                <div class="searchTop ps-3 ">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="#Explore"
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
@@ -33,14 +33,15 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid navigation d-flex justify-content-center align-items-center">
-                <a href="#" id="homeNavBtn" class="active"><i class="fa-solid fa-house px-4 fs-5"></i></a>
-                <a href="#"><i class="fa-regular fa-comment px-4 fs-5"></i></a>
-                <a href="../friendsPage/friendsPage.html" id="myProfileNavBtn"><i class="fa-solid fa-user px-4 fs-5"></i></i></a>
-                <a href="#"><i class="fa-regular fa-bell px-4 fs-5"></i></a>
-                <a href="#"><i class="fa-regular fa-heart px-4 fs-5"></i></a>
+            <div class=" navigation d-flex justify-content-center align-items-center">
+                <a href="#" id="homeNavBtn" class="active"><i class="fa-solid fa-house  fs-5"></i></a>
+                <a href="#"><i class="fa-regular fa-comment  fs-5"></i></a>
+                <a href="../friendsPage/friendsPage.html" id="myProfileNavBtn"><i
+                        class="fa-solid fa-user  fs-5"></i></i></a>
+                <a href="#"><i class="fa-regular fa-bell  fs-5"></i></a>
+                <a href="#"><i class="fa-regular fa-heart  fs-5"></i></a>
             </div>
-            <div class="container-fluid options d-flex justify-content-end align-items-center">
+            <div class=" options d-flex justify-content-end align-items-center">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle"
                         style="background-color: #282828; border-color: #282828;" type="button"
@@ -63,16 +64,15 @@
     <!--------------------------------- MAIN DASHBOARD ------------------------------>
 
 
-    <div class="mainBody container-fluid my-4 d-flex">
+    <div class="mainBody container-fluid my-4 d-flex justify-content-center">
 
         <!-- --------------PROFILE CARD---------------------- -->
 
         <div class="left d-flex flex-column">
-            <div class="card profile"
-                style="width: 100%; height: 400px; border-radius: 15px; position: relative;border: none; ">
+            <div class="card profile" style="width: 100%; height: 400px; border-radius: 15px; border: none; ">
                 <img src="https://images.unsplash.com/photo-1635016288720-c52507b9a717?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
                     class="card-img-top" alt="..." height="40%" style="object-fit: cover; border-radius: 15px;">
-                <div class="card-body d-flex flex-column">
+                <div class="card-body d-flex flex-column justify-content-between">
                     <div class="first">
                         <div class="profilePic d-flex justify-content-center align-items-center"
                             style="width: 100px; height: 100px;">
@@ -187,7 +187,7 @@
 
 
             <div class="postArea">
-                <!-- <div class="postConatiner postInputContainer mt-3">
+                <div class="postConatiner postInputContainer mt-3">
                     <div class="d-flex justify-content-between ">
                         <div class="authorsDetails d-flex align-items-center">
                             <div class="post-header-container d-flex align-items-center">
@@ -249,9 +249,29 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
+
+        <!-- ------------------------Right Part---------------- -->
+
+        <div class="users right">
+
+            <div class="card" style="width: 100%; background-color: #282828; color: #fafafa;">
+                <div class="imageContainer d-flex justify-content-center align-items-center">
+                    <img src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"
+                        class="card-img-top usersPp" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <button type="button" class="btn btn-outline-warning">Warning</button>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 

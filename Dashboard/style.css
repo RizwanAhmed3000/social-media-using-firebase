@@ -18,31 +18,47 @@ body {
 .navigation a i {
     color: #fafafa;
     transition: color 250ms ease;
+    padding: 1px 15px;
 }
 
 .navigation a i:hover {
     color: #ffc107;
 }
 
-a.active i{
-    color: #ffc107 !important; 
+.navigation {
+    width: 100%;
 }
 
-.search input, #message-text {
+.options {
+    width: 100%;
+}
+
+a.active i {
+    color: #ffc107 !important;
+}
+
+.search input,
+#message-text {
     background-color: #282828;
     color: #fafafa;
     border: none;
 }
 
-.search input:focus, #message-text:focus {
+.search input:focus,
+#message-text:focus {
     background-color: #282828;
     box-shadow: none;
     color: #fafafa;
     /* border:1px solid #ffc107 !important; */
 }
 
-.search input::placeholder, #message-text::placeholder {
+.search input::placeholder,
+#message-text::placeholder {
     color: #636363;
+}
+
+.logo-search {
+    width: 100%;
 }
 
 .dropdown-menu li a {
@@ -50,7 +66,7 @@ a.active i{
 
 }
 
-.mainBody{
+.mainBody {
     height: 100vh;
     background-color: #1a1a1a;
     padding: 0px 24px;
@@ -58,28 +74,29 @@ a.active i{
 
 .left,
 .mid,
-.right{
+.right {
     background-color: #1a1a1a;
     border-radius: 15px;
 }
 
-.mid{
+.mid {
     width: 50%;
     margin: 0px 15px;
 }
+
 .left,
-.right{
-    width: 30%;
-    padding: 0px 10px;
+.right {
+    width: 25%;
+    /* padding: 0px 10px; */
     /* margin: 0px 15px; */
 }
 
-.profile{
+.profile {
     background-color: #282828 !important;
     color: #fafafa !important;
 }
 
-.profilePic{
+.profilePic {
     background-color: #1a1a1a;
     border-radius: 10px;
     border: 8px solid #1a1a1a;
@@ -89,18 +106,23 @@ a.active i{
     transform: translateX(-50%);
 }
 
-.second{
+.second {
     /* margin-top: 2rem !important; */
     color: #fafafa;
 }
 
-.line{
+.line {
     width: 100%;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     height: 2px;
     background-color: #1a1a1a;
 }
+
+.search {
+    width: 70%;
+}
+
 /* 
 .myProfileBtn{
     transition: background-color 200ms ease, border-color 200ms ease;
@@ -114,81 +136,179 @@ a.active i{
     background-color: #ffc107;
 } */
 
-.postInputContainer{
+.postInputContainer {
     width: 100%;
     background-color: #282828;
     border-radius: 15px;
     padding: 15px 20px;
 }
-.image{
+
+.image {
     width: 60px;
 }
 
-#postInput{
+#postInput {
     background-color: #222;
 }
 
-.postBtn{
+.postBtn {
     color: #636363;
     width: 100%;
 }
 
-.btnOptions button{
+.btnOptions button {
     width: 120px;
 }
 
-.btnOptions button i{
+.btnOptions button i {
     margin-right: 10px;
 }
 
-.postImage-video{
+.postImage-video {
     width: 100%;
-    
+
 }
 
-.editBtn{
+.editBtn {
     color: #fafafa;
 }
 
-.editBtn:hover{
+.editBtn:hover {
     color: #1a1a1a;
 }
 
-.comment-container{
-    width: 100% !important ;
+.comment-container {
+    width: 100% !important;
 }
 
-#post-text{
+#post-text {
     word-wrap: break-word;
 }
 
 
-#comment{
+#comment {
     background-color: #222;
 }
 
-.imgBox{
+.imgBox {
     width: 100%;
 }
 
-#postImage{
+#postImage {
     width: 100%;
 }
 
-#uploadDiv{
+#uploadDiv {
     width: 69%;
 }
 
-#updateDiv{
+#updateDiv {
     width: 69%;
 }
-@media(max-width: 1024px){
-    .profile{
+
+.card-body h5 {
+    font-size: 1rem;
+}
+
+.card-body p {
+    font-size: 0.7rem;
+}
+
+.usersPp {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imageContainer {
+    width: 100%;
+    height: 150px;
+}
+
+/* -------Normal Screen------- */
+@media(max-width: 1024px) {
+    .profile {
         width: 100% !important;
-        height: 70% !important;
+        /* height: 70% !important; */
     }
+
     .left,
-    .right{
+    .right {
         padding: 0;
+    }
+
+    .username,
+    #followerCounter,
+    #followingCounter {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: .8rem !important;
+    }
+
+    .btnOptions button {
+        width: 100px;
+    }
+
+    .profile {
+        height: 450px;
+    }
+
+    .imageContainer {
+        height: 120px;
+    }
+}
+
+@media(min-width: 501px) and (max-width: 768px) {
+    .mainBody {
+        padding: 0px !important;
+    }
+
+    .left,
+    .right {
+        display: none !important;
+    }
+
+    .mid {
+        width: 80%;
+    }
+
+}
+
+@media(min-width: 320px) and (max-width: 500px) {
+    .mainBody {
+        padding: 0px !important;
+    }
+
+    .left,
+    .right {
+        display: none !important;
+    }
+
+    .mid {
+        width: 100%;
+    }
+
+    .searchTop {
+        display: none;
+    }
+
+    .btnOptions button {
+        width: 70px;
+        padding: 1px;
+    }
+
+    .navigation a i {
+        padding: 0px 7px;
+    }
+    .NavBar{
+        padding: 1px 2px;
+    }
+    .logo-search{
+        display: none !important;
+    }
+    .postInputContainer{
+        padding: 15px 8px;
     }
 }
