@@ -37,14 +37,14 @@ a.active i {
     color: #ffc107 !important;
 }
 
-.search input,
+.searchTop input,
 #message-text {
     background-color: #282828;
     color: #fafafa;
     border: none;
 }
 
-.search input:focus,
+.searchTop input:focus,
 #message-text:focus {
     background-color: #282828;
     box-shadow: none;
@@ -52,7 +52,7 @@ a.active i {
     /* border:1px solid #ffc107 !important; */
 }
 
-.search input::placeholder,
+.searchTop input::placeholder,
 #message-text::placeholder {
     color: #636363;
 }
@@ -119,7 +119,7 @@ a.active i {
     background-color: #1a1a1a;
 }
 
-.search {
+.searchTop {
     width: 70%;
 }
 
