@@ -224,7 +224,7 @@ async function createPost() {
 <div
     class="comment-container d-flex align-items-center mt-3 border-top border-secondary-subtle pt-2">
     <div class="image">
-        <img src=${loggedinUserPp || "https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691"}
+        <img src=${loggedinUserPp || 'https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691'}
             alt="" class="img-fluid rounded mx-auto d-block">
     </div>
     <div class="search ps-3 " style="width: 100%;">

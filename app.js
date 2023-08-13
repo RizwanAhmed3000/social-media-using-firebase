@@ -53,22 +53,26 @@ function loginHandler() {
 
 function signupHandler() {
 
-    createUserWithEmailAndPassword(auth, emailAddress.value, newPassword.value)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user)
-            if (user) {
-                addUserHandler(user.uid)
-                emptyInput()
-                alert(`User register successful`)
-            }
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(errorCode)
-            console.error(errorMessage)
-        });
+    if (firstName.value == ""|| lastName.value == ""  || emailAddress.value == "" || newPassword.value == "" || phoneNumber.value == ""){
+        alert('Fill all the fields')
+    } else{
+        createUserWithEmailAndPassword(auth, emailAddress.value, newPassword.value)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user)
+                if (user) {
+                    addUserHandler(user.uid)
+                    emptyInput()
+                    alert(`User register successful`)
+                }
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error(errorCode)
+                console.error(errorMessage)
+            });
+    }
 }
 
 
