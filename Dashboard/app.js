@@ -189,7 +189,7 @@ async function createPost() {
                     @${gettingUserData?.firstName}</p>
                 <div class="d-flex align-items-center justify-content-center">
                     <h5 class="mb-1 username">${gettingUserData?.firstName}</h5>
-                    <p class="mb-0 ms-2" style="color: #ffc107; font-size: 12px;">${new Date(timestamp.seconds * 1000) }</p>
+                    <p class="mb-0 ms-2" style="color: #ffc107; font-size: 12px;">${moment(timestamp.toDate()).fromNow() }</p>
                 </div>
             </div>
         </div>
