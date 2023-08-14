@@ -38,14 +38,16 @@ a.active i {
 }
 
 .searchTop input,
-#message-text, #comment {
+#message-text,
+#comment {
     background-color: #282828;
     color: #fafafa;
     border: none;
 }
 
 .searchTop input:focus,
-#message-text:focus, #comment:focus {
+#message-text:focus,
+#comment:focus {
     background-color: #282828;
     box-shadow: none;
     color: #fafafa;
@@ -53,7 +55,8 @@ a.active i {
 }
 
 .searchTop input::placeholder,
-#message-text::placeholder, #comment::placeholder {
+#message-text::placeholder,
+#comment::placeholder {
     color: #636363;
 }
 
@@ -82,6 +85,28 @@ a.active i {
 .mid {
     width: 50%;
     margin: 0px 15px;
+}
+
+.right {
+    height: 150vh;
+    overflow-y: auto;
+}
+
+.right::-webkit-scrollbar {
+    width: 10px;
+    background-color: #3d3d3d;
+}
+
+.right::-webkit-scrollbar-thumb {
+    background-color: #F90;
+    background-image: -webkit-linear-gradient(45deg,
+            rgba(255, 255, 255, .2) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, .2) 50%,
+            rgba(255, 255, 255, .2) 75%,
+            transparent 75%,
+            transparent);
 }
 
 .left,
@@ -225,6 +250,12 @@ a.active i {
     height: 150px;
 }
 
+.cardStyle {
+    width: 100% !important;
+    background-color: #282828 !important;
+    color: #fafafa !important;
+}
+
 /* -------Normal Screen------- */
 @media(max-width: 1024px) {
     .profile {
@@ -302,13 +333,16 @@ a.active i {
     .navigation a i {
         padding: 0px 7px;
     }
-    .NavBar{
+
+    .NavBar {
         padding: 1px 2px;
     }
-    .logo-search{
+
+    .logo-search {
         display: none !important;
     }
-    .postInputContainer{
+
+    .postInputContainer {
         padding: 15px 8px;
     }
 }

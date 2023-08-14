@@ -1,5 +1,5 @@
 // ------------------------Firebase----------------------------//
-import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL, deleteDoc, updateDoc, serverTimestamp, orderBy, query } from "../firebaseConfig.js"
+import { auth, db, onAuthStateChanged, signOut, getDoc, doc, collection, addDoc, getDocs, storage, ref, uploadBytesResumable, getDownloadURL, deleteDoc, updateDoc, serverTimestamp, orderBy, query, arrayRemove, arrayUnion } from "../firebaseConfig.js"
 
 
 const userName = document.querySelectorAll('.username')
@@ -13,10 +13,12 @@ const profilePic = document.querySelectorAll('.profileP')
 const profileDescription = document.querySelector('#profileDescription')
 const followersCounter = document.querySelector('#followerCounter')
 const followingsCounter = document.querySelector('#followingCounter')
+const usersContainer = document.querySelector('.right')
 let uploadPhoto = document.querySelector('#uploadPhotoBtn')
 let loggedinUserId;
 let loggedinUserPp;
 let postIdGlobal;
+let myFollowings;
 
 console.log(followersCounter, followingsCounter)
 
@@ -51,6 +53,19 @@ async function getUserData(uid) {
         })
         loggedinUserPp = profilePicture
         profileDescription.textContent = description || "No description added"
+        if (!docSnap.data().following) {
+            const washingtonRef = doc(db, "users", loggedinUserId);
+            await updateDoc(washingtonRef, {
+                following: arrayUnion(`.`)
+            });
+            getUserData(uid)
+            return;
+        } else {
+            const { following } = docSnap.data()
+            console.log(following, '==>> your followings')
+            myFollowings = [...following]
+            // console.log(myFollowings, '==>> my followings')
+        }
         const realFollowings = following.length-1;
         followingsCounter.innerHTML = realFollowings
         followersCounter.innerHTML = followers.length || '0000'
@@ -353,11 +368,77 @@ async function updatePostHandler() {
         postBtn.removeEventListener('click', updatePostHandler);
         postBtn.addEventListener('click', postHandler);
     }
+}
 
+async function getAllUser() {
+    usersContainer.innerHTML = ``
+    const refDb = collection(db, "users")
+    const q = query(refDb);
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        // console.log(doc.id, " => ", doc.data());
+        const { firstName, lastName, profilePicture, description, followers, following } = doc.data();
+        const column = document.createElement('div')
+        column.setAttribute('class', 'card cardStyle');
+        const card = ` <div class = "imageContainer d-flex justify-content-center align-items-center"> <img src=${profilePicture || 'https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1685543404~exp=1685544004~hmac=d07ea3ce3ef8f3935685c31c8166ad233839e12607dfb08424f2e5a129f3d691'}  class="card-img-top usersPp" alt="...">
+        </div>
+            <div class="card-body">
+                <h5 class="card-title">${firstName} ${lastName}</h5>
+                <p class="card-text">${description || "No description added"}</p>
+                <button type="button" class="btn btn-outline-warning followBtn" onclick = "followHandler('${firstName}', '${doc.id}', '${lastName}')">${followers?.includes(loggedinUserId) ? 'Unfollow' : 'Follow'}</button>
+            </div>`
+        column.innerHTML = card;
+        usersContainer.appendChild(column)
+    });
+}
+
+getAllUser()
+
+
+
+
+async function followHandler(userFirstName, followingUid, userLastName) {
+    console.log(followingUid, '==>> following user uid');
+    console.log(loggedinUserId, '==>> logged in user uid');
+    const washingtonRef = doc(db, "users", loggedinUserId);
+    if (!myFollowings.includes(`${followingUid}`)) {
+        await updateDoc(washingtonRef, {
+            following: arrayUnion(`${followingUid}`)
+        });
+        alert(`you are now following ${userFirstName} ${userLastName}`)
+        savingFollowersToOtherUser(followingUid, loggedinUserId);
+        getUserData(loggedinUserId)
+        getAllUser()
+        return
+    } else {
+        await updateDoc(washingtonRef, {
+            following: arrayRemove(`${followingUid}`)
+        });
+        alert(`you have unfollowed ${userFirstName} ${userLastName}`)
+        removingFollowersFromOtherUser(followingUid, loggedinUserId)
+        getUserData(loggedinUserId)
+        getAllUser()
+    }
+}
+
+async function savingFollowersToOtherUser(followingUid, currentUserUid) {
+    const washingtonRef = doc(db, "users", followingUid);
+    await updateDoc(washingtonRef, {
+        followers: arrayUnion(`${currentUserUid}`)
+    });
+}
+async function removingFollowersFromOtherUser(followingUid, currentUserUid) {
+    const washingtonRef = doc(db, "users", followingUid);
+    await updateDoc(washingtonRef, {
+        followers: arrayRemove(`${currentUserUid}`)
+    });
 }
 
 
 window.editPostHandler = editPostHandler;
 window.deletePostHandler = deletePostHandler;
+window.followHandler = followHandler;
 
 // export { postHandler, createPost, storePost }
