@@ -204,11 +204,15 @@ a.active i {
     }
 }
 
+/* ---------tablet------------- */
+
 @media(min-width: 700px) and (max-width: 768px) {
     .mid {
-        width: 100%;
+        width: 100% ;
     }
 }
+
+/* ---------------smartPhone------------------- */
 
 @media(min-width: 425px) and (max-width: 500px) {
 
@@ -246,14 +250,16 @@ a.active i {
     }
 }
 
-@media(min-width: 320px) and (max-width: 699px) {
+/* --------------smartphone Small ----------------------*/
+
+@media(min-width: 320px) and (max-width: 424px) {
     .searchTop {
         display: none;
     }
 
     .btnOptions button {
-        width: 100% !important;
-        padding: 1px;
+        width: 24% !important;
+        /* padding: 1px; */
     }
 
     .navigation a i {
