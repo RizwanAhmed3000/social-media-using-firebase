@@ -291,6 +291,8 @@ a.active i {
     }
 }
 
+/* -----------------Tablet------------------ */
+
 @media(min-width: 501px) and (max-width: 768px) {
     .mainBody {
         padding: 0px !important;
@@ -306,6 +308,9 @@ a.active i {
     }
 
 }
+
+
+/* -------------SmartPhone------------------- */
 
 @media(min-width: 320px) and (max-width: 500px) {
     .mainBody {

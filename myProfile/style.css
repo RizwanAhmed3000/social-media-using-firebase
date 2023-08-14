@@ -18,31 +18,50 @@ body {
 .navigation a i {
     color: #fafafa;
     transition: color 250ms ease;
+    padding: 1px 15px;
 }
 
 .navigation a i:hover {
     color: #ffc107;
 }
 
+.navigation {
+    width: 100%;
+}
+
+.options {
+    width: 100%;
+}
+
 a.active i {
     color: #ffc107 !important;
 }
 
-.search input, #message-text {
+.search input,
+#message-text,
+#comment {
     background-color: #282828;
     color: #fafafa;
     border: none;
 }
 
-.search input:focus, #message-text:focus {
+.search input:focus,
+#message-text:focus,
+#comment:focus {
     background-color: #282828;
     box-shadow: none;
     color: #fafafa;
     /* border:1px solid #ffc107 !important; */
 }
 
-.search input::placeholder, #message-text::placeholder {
+.search input::placeholder,
+#message-text::placeholder,
+#comment::placeholder {
     color: #636363;
+}
+
+.logo-search {
+    width: 100%;
 }
 
 .dropdown-menu li a {
@@ -50,7 +69,7 @@ a.active i {
 
 }
 
-.mainBody{
+.mainBody {
     height: 100vh;
     background-color: #1a1a1a;
     padding: 0px 24px;
@@ -58,29 +77,26 @@ a.active i {
 
 .left,
 .mid,
-.right{
+.right {
     background-color: #1a1a1a;
     border-radius: 15px;
 }
 
-.left{
+.left {
     width: 100%;
 }
 
-.mid{
+.mid {
     width: 60%;
     margin: 0px 15px;
 }
 
-
-
-
-.profile{
+.profile {
     background-color: #282828 !important;
     color: #fafafa !important;
 }
 
-.profilePic{
+.profilePic {
     background-color: #1a1a1a;
     border-radius: 10px;
     border: 8px solid #1a1a1a;
@@ -92,18 +108,19 @@ a.active i {
     transform: translateX(-50%);
 }
 
-.second{
+.second {
     /* margin-top: 2rem !important; */
     color: #fafafa;
 }
 
-.line{
+.line {
     width: 100%;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     height: 2px;
     background-color: #1a1a1a;
 }
+
 /* 
 .myProfileBtn{
     transition: background-color 200ms ease, border-color 200ms ease;
@@ -117,70 +134,159 @@ a.active i {
     background-color: #ffc107;
 } */
 
-.postInputContainer{
+.postInputContainer {
     width: 100%;
     background-color: #282828;
     border-radius: 15px;
     padding: 15px 20px;
 }
-.image{
+
+.image {
     width: 60px;
 }
 
-#postInput{
+#postInput {
     background-color: #222;
 }
 
-.postBtn{
+.postBtn {
     color: #636363;
     width: 100%;
 }
 
-.btnOptions button{
+.btnOptions button {
     width: 120px;
 }
 
-.btnOptions button i{
+.btnOptions button i {
     margin-right: 10px;
 }
 
-.postImage-video{
+.postImage-video {
     width: 100%;
-    
+
 }
 
-.comment-container{
-    width: 100% !important ;
+.comment-container {
+    width: 100% !important;
 }
 
-#post-text{
+#post-text {
     word-wrap: break-word;
 }
 
 
-#comment{
+#comment {
     background-color: #222;
 }
 
-.imgBox{
+.imgBox {
     width: 100%;
 }
 
-#postImage{
+#postImage {
     width: 100%;
 }
 
-#editProfileBtn a{
+#editProfileBtn a {
     color: #fafafa;
     text-decoration: none;
 }
 
-@media(max-width: 1024px){
-    .profile{
+@media(max-width: 1024px) {
+    .profile {
         width: 100% !important;
         height: 530px !important;
     }
-    .right{
+
+    .right {
         padding: 0;
+    }
+}
+
+@media(min-width: 700px) and (max-width: 768px) {
+    .mid {
+        width: 100%;
+    }
+}
+
+@media(min-width: 425px) and (max-width: 500px) {
+
+    .searchTop {
+        display: none;
+    }
+
+    .btnOptions button {
+        width: 100% !important;
+        padding: 1px;
+    }
+
+    .navigation a i {
+        padding: 0px 7px !important;
+    }
+
+    .NavBar {
+        padding: 1px 2px;
+    }
+
+    .logo-search {
+        display: none !important;
+    }
+
+    .mid {
+        width: 100%;
+    }
+
+    .postInputContainer {
+        padding: 15px 8px;
+    }
+
+    .mainBody {
+        padding: 0px 10px;
+    }
+}
+
+@media(min-width: 320px) and (max-width: 699px) {
+    .searchTop {
+        display: none;
+    }
+
+    .btnOptions button {
+        width: 100% !important;
+        padding: 1px;
+    }
+
+    .navigation a i {
+        padding: 0px 7px !important;
+    }
+
+    .NavBar {
+        padding: 1px 2px;
+    }
+
+    .logo-search {
+        display: none !important;
+    }
+
+    .mid {
+        width: 100%;
+    }
+
+    .postInputContainer {
+        padding: 15px 8px;
+    }
+
+    .username,
+    #followerCounter,
+    #followingCounter {
+        font-size: 1rem;
+    }
+
+    .third {
+        justify-content: space-between !important;
+    }
+
+    .mainBody {
+        padding: 0px 10px;
     }
 }
