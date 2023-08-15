@@ -1,8 +1,9 @@
 const mainContainer = document.querySelector('.mainContainer');
 // console.log(mainContainer);
 
-import { app, auth, db, collection, query, where, getDocs, getDoc, onAuthStateChanged, updateDoc, doc, arrayUnion, arrayRemove } from "../firebaseConfig.js"
+import { app, auth, db, collection, query, where, getDocs, getDoc, onAuthStateChanged, updateDoc, doc, arrayUnion, arrayRemove, signOut } from "../firebaseConfig.js"
 
+const logoutBtn = document.querySelector('.logoutBtn')
 let loggedinUserId;
 let myFollowings;
 
@@ -16,6 +17,17 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = '../index.html'
     }
 });
+
+logoutBtn.addEventListener('click', logoutHandler)
+
+function logoutHandler() {
+    signOut(auth).then(() => {
+        loggedinUserId = ``
+        window.location.href = "../index.html"
+    }).catch((error) => {
+        console.error(error)
+    });
+}
 
 async function getUserData(uid) {
     const docRef = doc(db, "users", uid);

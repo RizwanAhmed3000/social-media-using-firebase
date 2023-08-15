@@ -1,4 +1,4 @@
-import { auth, db, onAuthStateChanged, getDoc, doc, storage, setDoc, ref, uploadBytesResumable, getDownloadURL } from "../firebaseConfig.js"
+import { auth, db, onAuthStateChanged, getDoc, doc, storage, setDoc, ref, uploadBytesResumable, getDownloadURL, signOut } from "../firebaseConfig.js"
 
 
 const firstNameHtml = document.querySelector('#firstName')
@@ -7,6 +7,7 @@ const phoneNumHtml = document.querySelector('#phoneNum')
 const editBtn = document.querySelector('#editSubBtn')
 const description = document.querySelector('#description')
 const profilePicHtml = document.querySelector('#profilePic')
+const logoutBtn = document.querySelector('.logoutBtn')
 let loggedinUserEmail;
 let loggedinUserId;
 
@@ -40,6 +41,8 @@ async function getUserData(uid) {
         console.log("No such document!");
     }
 }
+
+
 
 
 
@@ -120,3 +123,15 @@ async function editProfileHandler() {
     }
 }
 
+
+
+logoutBtn.addEventListener('click', logoutHandler)
+
+function logoutHandler() {
+    signOut(auth).then(() => {
+        loggedinUserId = ``
+        window.location.href = "../index.html"
+    }).catch((error) => {
+        console.error(error)
+    });
+}
