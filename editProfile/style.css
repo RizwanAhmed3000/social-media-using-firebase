@@ -24,20 +24,23 @@ body {
     color: #ffc107;
 }
 
-.search input, #message-text {
+.search input,
+#message-text {
     background-color: #282828;
     color: #fafafa;
     border: none;
 }
 
-.search input:focus, #message-text:focus {
+.search input:focus,
+#message-text:focus {
     background-color: #282828;
     box-shadow: none;
     color: #fafafa;
     /* border:1px solid #ffc107 !important; */
 }
 
-.search input::placeholder, #message-text::placeholder {
+.search input::placeholder,
+#message-text::placeholder {
     color: #636363;
 }
 
@@ -46,14 +49,37 @@ body {
 
 }
 
-.mainBody{
+.mainBody {
     height: 100vh;
     background-color: #1a1a1a;
     padding: 0px 24px;
     /* border: 1px solid red; */
 }
 
-.formControlContainer{
+.formControlContainer {
     /* border: wheat solid 1px; */
     width: 50%;
+}
+
+
+@media(min-width: 320px) and (max-width: 600px) {
+    .navigation a i {
+        padding: 0px 7px !important;
+    }
+
+    .formControlContainer {
+        width: 100%;
+    }
+
+    .logo-search{
+        display: none !important;
+    }
+
+    .navigation{
+        padding-left: 0px;
+    }
+
+    .options{
+        padding-left: 0px !important;
+    }
 }

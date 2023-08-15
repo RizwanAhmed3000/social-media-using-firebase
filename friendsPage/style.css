@@ -89,6 +89,10 @@ body {
     height: 220px;
 }
 
+a.active i {
+    color: #ffc107 !important;
+}
+
 
 @media(min-width: 425px) and (max-width: 767px) {
 
