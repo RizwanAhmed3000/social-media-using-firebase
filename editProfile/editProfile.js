@@ -36,6 +36,7 @@ async function getUserData(uid) {
         phoneNumHtml.value = PhoneNumber
         loggedinUserEmail = emailAddress
         // description.value ?= description
+        
 
     } else {
         console.log("No such document!");
